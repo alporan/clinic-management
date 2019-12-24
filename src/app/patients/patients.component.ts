@@ -12,6 +12,7 @@ import { Post, Del } from './post.model';
 export class PatientsComponent implements OnInit {
   loadedPosts: Post[] = [];
   isFetching = false;
+  isDisplayable = false;
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +35,13 @@ export class PatientsComponent implements OnInit {
 
   onFetchPosts() {
     // Send Http request
+    if ( this.isDisplayable === false){
+      this.isDisplayable = true;
+    } 
+    else {
+      this.isDisplayable = false;
+    }
+
     this.fetchPosts();
   }
 

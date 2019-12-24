@@ -1,1 +1,82 @@
-<p>doctors works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+          <div class="form-group">
+            <label for="name">Doktor Adı</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              required
+              ngModel
+              name="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="surname">Doktor Soyadı</label>
+            <input
+              type="text"
+              class="form-control"
+              id="surname"
+              required
+              ngModel
+              name="surname"
+            />
+          </div>
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!postForm.valid"
+          > Doktor Ekle
+          </button>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <form #deleteForm="ngForm" (ngSubmit)="onClearPosts(deleteForm.value)">
+          <div class="form-group">
+            <label for="id">Doktor ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              required
+              ngModel
+              name="id"
+            />
+          </div>
+          <button
+            class="btn btn-danger"
+            [disabled]="loadedPosts.length < 1"
+            (click)="onClearPosts()"
+          >
+          Doktor Sil
+          </button>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <button class="btn btn-primary" (click)="onFetchPosts()">
+          Doktorları Görüntüle
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
+        <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching && isDisplayable">
+          <li class="list-group-item" *ngFor="let post of loadedPosts">
+            <h3>{{ post.name }} {{ post.surname }}</h3>
+            <p>Doktor ID: {{ post.id }}</p>
+          </li>
+        </ul>
+        <p *ngIf="isFetching">Loading...</p>
+      </div>
+    </div>
+  </div>
+  

@@ -8,19 +8,30 @@ import { AppComponent } from './app.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { PatientsComponent } from './patients/patients.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
+import { Routes, RouterModule } from '@angular/router';
+import { PatientpanelComponent } from './patientpanel/patientpanel.component';
+
+const appRoutes: Routes = [
+  { path: 'admin/patients', component:  PatientsComponent },
+  { path: 'admin/doctors', component:  DoctorsComponent },
+  { path: 'admin/appointments', component:  AppointmentsComponent },
+  { path: 'patient', component:  PatientpanelComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     DoctorsComponent,
     PatientsComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    PatientpanelComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

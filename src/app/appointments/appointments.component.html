@@ -1,1 +1,94 @@
-<p>appointments works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+          <div class="form-group">
+            <label for="patientid">Hasta ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="patientid"
+              required
+              ngModel
+              name="patientid"
+            />
+          </div>
+          <div class="form-group">
+            <label for="doctorid">Doktor ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="doctorid"
+              required
+              ngModel
+              name="doctorid"
+            />
+          </div>
+          <div class="form-group">
+            <label for="appointmentDate">Randevu Tarihi</label>
+            <input
+              type="date"
+              class="form-control"
+              id="appointmentDate"
+              required
+              ngModel
+              name="appointmentDate"
+            />
+          </div>
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!postForm.valid"
+          > Randevu Ekle
+          </button>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <form #deleteForm="ngForm" (ngSubmit)="onClearPosts(deleteForm.value)">
+          <div class="form-group">
+            <label for="id">Randevu ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              required
+              ngModel
+              name="id"
+            />
+          </div>
+          <button
+            class="btn btn-danger"
+            [disabled]="loadedPosts.length < 1"
+            (click)="onClearPosts()"
+          > Randevu Sil
+          </button>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <button class="btn btn-primary" (click)="onFetchPosts()">
+          Randevuları Görüntüle
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
+        <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching && isDisplayable">
+          <li class="list-group-item" *ngFor="let post of loadedPosts">
+            <h3> Doktor: {{ post.doctor.name }} {{ post.doctor.surname }} </h3>
+            <h3> Hasta: {{ post.patient.name }} {{ post.patient.surname }} </h3>
+            <p> Randevu ID: {{ post.id }}</p>
+            <p> Randevu Tarihi: {{ post.appointmentDate }}</p>
+          </li>
+        </ul>
+        <p *ngIf="isFetching">Loading...</p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,28 +1,18 @@
 <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <div class="col-xs-12 col-md-12">
         <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a href="#">Admin Paneli</a></li>
-          <li role="presentation"><a href="#">Hastalar</a></li>
-          <li role="presentation"><a href="#">Doktorlar</a></li>
-          <li role="presentation"><a href="#">Randevular</a></li>
+          <li role="presentation" class="active"><a routerLink="/">Admin Paneli</a></li>
+          <li role="presentation"><a routerLink="/admin/patients">Hastalar</a></li>
+          <li role="presentation"><a routerLink="/admin/doctors">Doktorlar</a></li>
+          <li role="presentation"><a routerLink="/admin/appointments">Randevular</a></li>
+          <li role="presentation" class="active"><a routerLink="/">Hasta Paneli</a></li>
+          <li role="presentation"><a routerLink="/patient"> Randevu Al/Görüntüle</a></li>
         </ul>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <app-doctors></app-doctors>
+      <div class="col-xs-12 col-md-6">
+        <router-outlet></router-outlet>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <app-patients></app-patients>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <app-appointments></app-appointments>
-      </div>
-    </div>
-  </div>
-  
