@@ -1,1 +1,92 @@
-<p>patientpanel works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+          <div class="form-group">
+            <label for="name">Hasta Adı</label>
+            <input
+              type="text" class="form-control" id="name"
+              required ngModel name="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="surname">Hasta Soyadı</label>
+            <input
+              type="text" class="form-control" id="surname"
+              required ngModel name="surname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="id">Doktor ID</label>
+            <input
+              type="text" class="form-control" id="id"
+              required ngModel name="id"
+            />
+          </div>
+          <div class="form-group">
+            <label for="appointmentDate">Randevu Tarihi</label>
+            <input
+              type="date" class="form-control" id="appointmentDate"
+              required ngModel name="appointmentDate"
+            />
+          </div>
+          <button class="btn btn-success" type="submit" [disabled]="!postForm.valid"
+          > Randevu Al
+          </button>
+        </form>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <p *ngIf="loadedDoctors.length < 1 && !isFetchingDoctors">Doktor Listesi Boş!</p>
+        <ul class="list-group" *ngIf="loadedDoctors.length >= 1 && !isFetchingDoctors">
+          <li class="list-group-item" *ngFor="let doctor of loadedDoctors">
+            <h3>{{ doctor.name }} {{ doctor.surname }}</h3>
+            <p>Doktor ID: {{ doctor.id }}</p>
+          </li>
+        </ul>
+        <p *ngIf="isFetchingDoctors">Yükleniyor...</p>
+      </div>
+    </div>
+    <p *ngIf="isDisplayable2"> Hasta ID: {{ patientid2 }}</p>
+    <p *ngIf="isDisplayable2"> Randevu No: {{ appointmentid2 }}</p>
+    <hr />
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <form #postForm2="ngForm" (ngSubmit)="onFetchAppointment(postForm2.value)">
+            <div class="form-group">
+              <label for="patientid">Hasta ID</label>
+              <input
+                type="text" class="form-control" id="patientid"
+                required ngModel name="patientid"
+              />
+            </div>
+            <div class="form-group">
+              <label for="id">Randevu No</label>
+              <input
+                type="text" class="form-control" id="id"
+                required ngModel name="id"
+              />
+            </div>
+            <button
+              class="btn btn-primary" type="submit" [disabled]="!postForm2.valid"
+            > Randevu Görüntüle
+            </button>
+            <button
+              class="btn btn-danger" type="delete" [disabled]="!postForm2.valid"
+            > Randevu Sil
+            </button>
+          </form>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <p *ngIf="loadedAppointments.length < 1 && !isFetchingAppointments && isDisplayable">Randevu Bulunamadı! </p>
+        <ul class="list-group" *ngIf="loadedAppointments.length >= 1 && !isFetchingAppointments && !isDisplayable">
+          <li class="list-group-item" *ngFor="let appointment of loadedAppointments">
+            <h3 *ngIf="patientid == appointment.patient.id && appointmentid == appointment.id"> Doktor: {{ appointment.doctor.name }} {{ appointment.doctor.surname }} </h3>
+            <h3 *ngIf="patientid == appointment.patient.id && appointmentid == appointment.id"> Hasta: {{ appointment.patient.name }} {{ appointment.patient.surname }} </h3>
+            <p *ngIf="patientid == appointment.patient.id && appointmentid == appointment.id"> Randevu ID: {{ appointment.id }}</p>
+            <p *ngIf="patientid == appointment.patient.id && appointmentid == appointment.id"> Randevu Tarihi: {{ appointment.appointmentDate }}</p>
+          </li>
+        </ul>
+        <p *ngIf="isFetchingAppointments">Yükleniyor...</p>
+    </div>
+  </div>  

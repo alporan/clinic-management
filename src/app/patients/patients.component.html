@@ -5,30 +5,19 @@
         <div class="form-group">
           <label for="name">Hasta Adı</label>
           <input
-            type="text"
-            class="form-control"
-            id="name"
-            required
-            ngModel
-            name="name"
+            type="text" class="form-control" id="name"
+            required ngModel name="name"
           />
         </div>
         <div class="form-group">
           <label for="surname">Hasta Soyadı</label>
           <input
-            type="text"
-            class="form-control"
-            id="surname"
-            required
-            ngModel
-            name="surname"
+            type="text" class="form-control" id="surname"
+            required ngModel name="surname"
           />
         </div>
-        <button
-          class="btn btn-success"
-          type="submit"
-          [disabled]="!postForm.valid"
-        > Hasta Ekle
+        <button class="btn btn-success" type="submit" [disabled]="!postForm.valid" > 
+          Hasta Ekle
         </button>
       </form>
     </div>
@@ -40,19 +29,11 @@
         <div class="form-group">
           <label for="id">Hasta ID</label>
           <input
-            type="text"
-            class="form-control"
-            id="id"
-            required
-            ngModel
-            name="id"
+            type="text" class="form-control" id="id"
+            required ngModel name="id"
           />
         </div>
-        <button
-          class="btn btn-danger"
-          [disabled]="loadedPosts.length < 1"
-          (click)="onClearPosts()"
-        >
+        <button class="btn btn-danger" [disabled]="loadedPosts.length < 1 || !deleteForm.valid"  (click)="onClearPosts()">
           Hasta Sil
         </button>
       </form>
@@ -68,14 +49,14 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
+      <p *ngIf="loadedPosts.length < 1 && !isFetching && isDisplayable">Hasta listesi boş!</p>
       <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching && isDisplayable">
         <li class="list-group-item" *ngFor="let post of loadedPosts">
           <h3>{{ post.name }} {{ post.surname }}</h3>
           <p>Hasta ID: {{ post.id }}</p>
         </li>
       </ul>
-      <p *ngIf="isFetching">Loading...</p>
+      <p *ngIf="isFetching">Yükleniyor...</p>
     </div>
   </div>
 </div>

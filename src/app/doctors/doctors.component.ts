@@ -21,12 +21,8 @@ export class DoctorsComponent implements OnInit {
   }
 
   onCreatePost(postData: Post) {
-    // Send Http request
     this.http
-      .post<{ name: string }>(
-        'http://localhost:8080/patients',
-        postData
-      )
+      .post<{ name: string }>('http://localhost:8080/doctors', postData)
       .subscribe(responseData => {
         this.fetchPosts();
         console.log(responseData);
@@ -34,13 +30,9 @@ export class DoctorsComponent implements OnInit {
   }
 
   onFetchPosts() {
-    // Send Http request
-    if ( this.isDisplayable === false){
-      this.isDisplayable = true;
-    } 
-    else {
-      this.isDisplayable = false;
-    }
+    if ( this.isDisplayable === false) { this.isDisplayable = true; }
+    else { this.isDisplayable = false; }
+
     this.fetchPosts();
   }
 
@@ -55,9 +47,7 @@ export class DoctorsComponent implements OnInit {
   private fetchPosts() {
     this.isFetching = true;
     this.http
-      .get<{ [key: string]: Post }>(
-        'http://localhost:8080/doctors'
-      )
+      .get<{ [key: string]: Post }>('http://localhost:8080/doctors')
       .pipe(
         map(responseData => {
           const postsArray: Post[] = [];

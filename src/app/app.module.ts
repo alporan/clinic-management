@@ -12,10 +12,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { PatientpanelComponent } from './patientpanel/patientpanel.component';
 
 const appRoutes: Routes = [
-  { path: 'admin/patients', component:  PatientsComponent },
-  { path: 'admin/doctors', component:  DoctorsComponent },
-  { path: 'admin/appointments', component:  AppointmentsComponent },
-  { path: 'patient', component:  PatientpanelComponent }
+  { path: 'admin/hasta', component:  PatientsComponent },
+  { path: 'admin/doktor', component:  DoctorsComponent },
+  { path: 'admin/randevu', component:  AppointmentsComponent },
+  { path: 'hastapaneli', component:  PatientpanelComponent }
 ];
 
 @NgModule({

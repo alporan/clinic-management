@@ -21,8 +21,6 @@ export class AppointmentsComponent implements OnInit {
   }
 
   onCreatePost(postData: PostObj) {
-    // Send Http request
-
     this.http
       .post<{ name: string }>(
         'http://localhost:8080/doctors/' + postData.doctorid +  '/patients/' + postData.patientid, postData
@@ -34,17 +32,13 @@ export class AppointmentsComponent implements OnInit {
   }
 
   onFetchPosts() {
-    // Send Http request
-    if ( this.isDisplayable === false) {
-      this.isDisplayable = true;
-    } else {
-      this.isDisplayable = false;
-    }
+    if ( this.isDisplayable === false) { this.isDisplayable = true; }
+    else { this.isDisplayable = false; }
+    
     this.fetchPosts();
   }
 
   onClearPosts(id: DeleteObj) {
-    // Send Http request
     this.http.delete('http://localhost:8080/appointments/' + id.id)
     .subscribe(responseData => {
       this.fetchPosts();
@@ -62,7 +56,7 @@ export class AppointmentsComponent implements OnInit {
           const postsArray: GetObj[] = [];
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
-              console.log(key);  
+              console.log(key);
               console.log(responseData[key]);
 
               postsArray.push({ ...responseData[key]});

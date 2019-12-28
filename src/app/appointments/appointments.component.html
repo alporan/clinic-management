@@ -5,34 +5,22 @@
           <div class="form-group">
             <label for="patientid">Hasta ID</label>
             <input
-              type="text"
-              class="form-control"
-              id="patientid"
-              required
-              ngModel
-              name="patientid"
+              type="text" class="form-control" id="patientid"
+              required ngModel name="patientid"
             />
           </div>
           <div class="form-group">
             <label for="doctorid">Doktor ID</label>
             <input
-              type="text"
-              class="form-control"
-              id="doctorid"
-              required
-              ngModel
-              name="doctorid"
+              type="text" class="form-control" id="doctorid"
+              required ngModel name="doctorid"
             />
           </div>
           <div class="form-group">
             <label for="appointmentDate">Randevu Tarihi</label>
             <input
-              type="date"
-              class="form-control"
-              id="appointmentDate"
-              required
-              ngModel
-              name="appointmentDate"
+              type="date" class="form-control" id="appointmentDate"
+              required ngModel name="appointmentDate"
             />
           </div>
           <button
@@ -78,7 +66,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-6">
-        <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
+        <p *ngIf="loadedPosts.length < 1 && !isFetching && isDisplayable">Randevu listesi boş!</p>
         <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching && isDisplayable">
           <li class="list-group-item" *ngFor="let post of loadedPosts">
             <h3> Doktor: {{ post.doctor.name }} {{ post.doctor.surname }} </h3>
@@ -87,7 +75,7 @@
             <p> Randevu Tarihi: {{ post.appointmentDate }}</p>
           </li>
         </ul>
-        <p *ngIf="isFetching">Loading...</p>
+        <p *ngIf="isFetching">Yükleniyor...</p>
       </div>
     </div>
   </div>
